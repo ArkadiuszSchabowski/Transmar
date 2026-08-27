@@ -1,0 +1,44 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+model Product {
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  assemblyLines AssemblyLine[]
+}
+
+model AssemblyLine {
+  id                      Int                       @id @default(autoincrement())
+  name                    String
+  active                  Boolean                   @default(false)
+  product                 Product                   @relation(fields: [productId], references: [id])
+  productId               Int
+  assemblyLineWorkStations AssemblyLineWorkstation[]
+
+  @@unique([productId, name])
+}
+
+model Workstation {
+  id                       Int                       @id @default(autoincrement())
+  name                     String                    @unique
+  shortName                String
+  pcName                   String
+  assemblyLineWorkStations AssemblyLineWorkstation[]
+}
+
+model AssemblyLineWorkstation {
+  id            Int         @id @default(autoincrement())
+  assemblyLineId Int
+  workstationId Int
+  order         Int
+  assemblyLine  AssemblyLine @relation(fields: [assemblyLineId], references: [id])
+  workstation   Workstation  @relation(fields: [workstationId], references: [id])
+
+  @@unique([assemblyLineId, workstationId])
+}
