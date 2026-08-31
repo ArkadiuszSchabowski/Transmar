@@ -4,6 +4,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 model Product {
@@ -18,7 +19,7 @@ model AssemblyLine {
   active                   Boolean                   @default(false)
   product                  Product                   @relation(fields: [productId], references: [id])
   productId                Int
-  assemblyLineWorkstations AssemblyLineWorkstation[]
+  assemblyLineWorkStations AssemblyLineWorkstation[]
 
   @@unique([productId, name])
 }
@@ -28,7 +29,7 @@ model Workstation {
   name                     String                    @unique
   shortName                String
   pcName                   String
-  assemblyLineWorkstations AssemblyLineWorkstation[]
+  assemblyLineWorkStations AssemblyLineWorkstation[]
 }
 
 model AssemblyLineWorkstation {
