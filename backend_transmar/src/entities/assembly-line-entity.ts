@@ -1,6 +1,6 @@
-import { Expose } from "class-transformer";
+import { Expose } from 'class-transformer';
 
-export class GetAssemblyLineDto {
+export class AssemblyLineEntity {
   @Expose()
   id!: number;
   @Expose()

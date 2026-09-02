@@ -16,7 +16,7 @@ export class UserValidator
 {
   validateDto(dto: AddUserDto): void {
     if (!dto.username || dto.username.trim().length === 0) {
-      throw new BadRequestException('Username is required');
+      throw new BadRequestException('Username is required.');
     }
 
     const trimmedUsername = dto.username.trim();
@@ -25,12 +25,12 @@ export class UserValidator
       trimmedUsername.length > USERNAME_MAX_LENGTH
     ) {
       throw new BadRequestException(
-        `Username must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters long`,
+        `Username must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters long.`,
       );
     }
 
     if (!dto.password) {
-      throw new BadRequestException('Password is required');
+      throw new BadRequestException('Password is required.');
     }
 
     if (
@@ -38,7 +38,7 @@ export class UserValidator
       dto.password.length > PASSWORD_MAX_LENGTH
     ) {
       throw new BadRequestException(
-        `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters long`,
+        `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters long.`,
       );
     }
   }
@@ -55,7 +55,7 @@ export class UserValidator
       trimmed.length > PROFESSION_MAX_LENGTH
     ) {
       throw new BadRequestException(
-        `Profession must be between ${PROFESSION_MIN_LENGTH} and ${PROFESSION_MAX_LENGTH} characters long`,
+        `Profession must be between ${PROFESSION_MIN_LENGTH} and ${PROFESSION_MAX_LENGTH} characters long.`,
       );
     }
   }

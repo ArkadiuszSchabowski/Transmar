@@ -14,7 +14,7 @@ export class ProductValidator implements ValidatorContract<AddProductDto>, NameV
 
   validateName(name: string | undefined): void {
     if (!name || (name === undefined) || name.trim().length === 0) {
-      throw new BadRequestException('Product name is required');
+      throw new BadRequestException('Product name is required.');
     }
     const trimmedName = name.trim();
     if (
@@ -22,7 +22,7 @@ export class ProductValidator implements ValidatorContract<AddProductDto>, NameV
       trimmedName.length > NAME_MAX_LENGTH
     ) {
       throw new BadRequestException(
-        `Product name must be between ${NAME_MIN_LENGTH} and ${NAME_MAX_LENGTH} characters long`,
+        `Product name must be between ${NAME_MIN_LENGTH} and ${NAME_MAX_LENGTH} characters long.`,
       );
     }
   }
