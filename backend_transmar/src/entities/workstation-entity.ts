@@ -1,6 +1,6 @@
-import { Expose } from "class-transformer";
+import { Expose } from 'class-transformer';
 
-export class GetWorkstationDto {
+export class WorkstationEntity {
   @Expose()
   id!: number;
   @Expose()
