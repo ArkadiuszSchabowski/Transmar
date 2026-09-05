@@ -13,6 +13,7 @@ import { GetAssemblyLineDto } from 'src/models/assembly-line/get-assembly-line-d
 import { UpdateAssemblyLineDto } from 'src/models/assembly-line/update-assembly-line-dto';
 import { AssemblyLineRepository } from 'src/repositories/assembly-line-repository/assembly-line-repository';
 import { AssemblyLineValidator } from 'src/validators/assembly-line.validator';
+import { ProductValidator } from 'src/validators/product-validator';
 
 @Injectable()
 export class AssemblyLineService
@@ -22,9 +23,16 @@ export class AssemblyLineService
   constructor(
     private readonly assemblyLineRepository: AssemblyLineRepository,
     private readonly assemblyLineValidator: AssemblyLineValidator,
+    private readonly productValidator: ProductValidator
   ) {}
-  getByProduct(name: string): Promise<GetAssemblyLineDto | null> {
-    throw new Error('Method not implemented.');
+  async getByProduct(name: string): Promise<GetAssemblyLineDto[]> {
+    this.productValidator.validateName(name);
+
+    var assemblyLines = await this.assemblyLineRepository.getByProduct(name);
+
+      return plainToInstance(GetAssemblyLineDto, assemblyLines, {
+      excludeExtraneousValues: true,
+    });
   }
 
   async add(dto: AddAssemblyLineDto): Promise<void> {

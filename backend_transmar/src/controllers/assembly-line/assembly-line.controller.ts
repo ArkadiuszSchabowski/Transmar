@@ -37,7 +37,7 @@ export class AssemblyLineController {
   @Get('by-product/:name')
   getByProduct(
     @Param('name') name: string,
-  ): Promise<GetAssemblyLineDto | null> {
+  ): Promise<GetAssemblyLineDto[] | null> {
     return this.service.getByProduct(name);
   }
 

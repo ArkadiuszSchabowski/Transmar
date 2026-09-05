@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { AssemblyLine } from '@prisma/client';
+import { GetByProductRepository } from 'src/interfaces/get-by-product-repository/get-by-product-repository.interface';
 import { RepositoryContract } from 'src/interfaces/repository-contract/repository-contract.interface';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class AssemblyLineRepository implements RepositoryContract<AssemblyLine> {
+export class AssemblyLineRepository
+  implements RepositoryContract<AssemblyLine>, GetByProductRepository
+{
   constructor(private readonly prisma: PrismaService) {}
 
   async add(dto: {
@@ -22,6 +25,19 @@ export class AssemblyLineRepository implements RepositoryContract<AssemblyLine> 
 
   async getAll(): Promise<AssemblyLine[]> {
     return this.prisma.assemblyLine.findMany();
+  }
+
+  async getByProduct(name: string): Promise<AssemblyLine[]> {
+    return this.prisma.assemblyLine.findMany({
+      where: {
+        product: {
+          name: name,
+        },
+      },
+      include: {
+        product: true,
+      },
+    });
   }
 
   async update(
