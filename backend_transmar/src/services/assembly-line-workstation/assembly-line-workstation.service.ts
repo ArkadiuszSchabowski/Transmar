@@ -7,15 +7,30 @@ import { WorkstationService } from '../workstation/workstation.service';
 import { AssemblyLineWorkstationValidator } from 'src/validators/assembly-line-workstation.validator';
 import { plainToInstance } from 'class-transformer';
 import { AssemblyLineWorkstationEntity } from 'src/entities/assembly-line-workstation-entity';
+import { Remove } from 'src/interfaces/remove/remove.interface';
 
 @Injectable()
-export class AssemblyLineWorkstationService implements Add<AddAssemblyLineWorkstationDto> {
+export class AssemblyLineWorkstationService
+  implements Add<AddAssemblyLineWorkstationDto>, Remove
+{
   constructor(
     private readonly assemblyLineWorkstationRepository: AssemblyLineWorkstationRepository,
     private readonly assemblyLineService: AssemblyLineService,
     private readonly workstationService: WorkstationService,
     private readonly assemblyLineWorkStationValidator: AssemblyLineWorkstationValidator,
   ) {}
+  async remove(id: number): Promise<void> {
+    const assemblyLine =
+      await this.assemblyLineWorkstationRepository.getById(id);
+    if (!assemblyLine) {
+      throw new NotFoundException(
+        `Assembly line workstation with id ${id} not found.`,
+      );
+    }
+
+    await this.assemblyLineWorkstationRepository.remove(id);
+  }
+
   async add(dto: AddAssemblyLineWorkstationDto): Promise<void> {
     this.assemblyLineWorkStationValidator.validateDto(dto);
 
@@ -38,8 +53,8 @@ export class AssemblyLineWorkstationService implements Add<AddAssemblyLineWorkst
     );
 
     var entity = plainToInstance(AssemblyLineWorkstationEntity, dto, {
-          excludeExtraneousValues: true,
-    })
+      excludeExtraneousValues: true,
+    });
 
     await this.assemblyLineWorkstationRepository.add({
       ...entity,
