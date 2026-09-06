@@ -6,6 +6,7 @@ import { WorkstationValidator } from "src/validators/workstation-validator";
 
 @Module({
   controllers: [WorkstationController],
-  providers: [WorkstationService, WorkstationRepository, WorkstationValidator]
+  providers: [WorkstationService, WorkstationRepository, WorkstationValidator],
+  exports: [WorkstationService, WorkstationRepository, WorkstationValidator]
 })
 export class WorkstationModule {}

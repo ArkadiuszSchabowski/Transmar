@@ -7,6 +7,12 @@ import { ProductValidator } from 'src/validators/product-validator';
 
 @Module({
   controllers: [AssemblyLineController],
-  providers: [AssemblyLineService, AssemblyLineRepository, AssemblyLineValidator, ProductValidator],
+  providers: [
+    AssemblyLineService,
+    AssemblyLineRepository,
+    AssemblyLineValidator,
+    ProductValidator,
+  ],
+  exports: [AssemblyLineService, AssemblyLineRepository],
 })
 export class AssemblyLineModule {}
