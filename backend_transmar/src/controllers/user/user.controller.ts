@@ -6,10 +6,11 @@ import {
   Param,
   ParseIntPipe,
   Post,
-  Put
+  Put,
 } from '@nestjs/common';
 import { AddUserDto } from 'src/models/user/add-user-dto';
 import { GetUserDto } from 'src/models/user/get-user-dto';
+import { LoginUserDto } from 'src/models/user/login-user-dto';
 import { UpdateUserDto } from 'src/models/user/update-user-dto';
 import { UserService } from 'src/services/user/user.service';
 
@@ -20,6 +21,11 @@ export class UserController {
   @Post()
   add(@Body() dto: AddUserDto): Promise<void> {
     return this.service.add(dto);
+  }
+
+  @Post('login')
+  login(@Body() dto: LoginUserDto): Promise<{ accessToken: string }> {
+    return this.service.login(dto);
   }
 
   @Get()

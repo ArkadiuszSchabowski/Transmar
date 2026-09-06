@@ -2,7 +2,9 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { plainToInstance } from 'class-transformer';
@@ -10,6 +12,7 @@ import { UserEntity } from 'src/entities/user-entity';
 import { ServiceContract } from 'src/interfaces/service-contract/service-contract.interface';
 import { AddUserDto } from 'src/models/user/add-user-dto';
 import { GetUserDto } from 'src/models/user/get-user-dto';
+import { LoginUserDto } from 'src/models/user/login-user-dto';
 import { UpdateUserDto } from 'src/models/user/update-user-dto';
 import { UserRepository } from 'src/repositories/user-repository/user-repository';
 import { UserValidator } from 'src/validators/user-validator';
@@ -25,7 +28,31 @@ export class UserService implements ServiceContract<
   constructor(
     private readonly userRepository: UserRepository,
     private readonly userValidator: UserValidator,
+    private readonly jwtService: JwtService,
   ) {}
+
+  async login(dto: LoginUserDto): Promise<{ accessToken: string }> {
+    this.userValidator.validateLogin(dto);
+    const user = await this.userRepository.getByName(dto.name);
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid credentials.');
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      dto.password,
+      user.passwordHash,
+    );
+
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid credentials.');
+    }
+
+    const payload = { sub: user.id, username: user.username };
+    const accessToken = await this.jwtService.signAsync(payload);
+
+    return { accessToken };
+  }
 
   async add(dto: AddUserDto): Promise<void> {
     this.userValidator.validateDto(dto);

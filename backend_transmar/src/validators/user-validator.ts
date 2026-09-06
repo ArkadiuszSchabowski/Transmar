@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { ProfessionContract } from 'src/interfaces/profession-contract/profession-contract.interface';
 import { ValidatorContract } from 'src/interfaces/validator-contract/validator-contract.interface';
 import { AddUserDto } from 'src/models/user/add-user-dto';
+import { LoginUserDto } from 'src/models/user/login-user-dto';
 
 const USERNAME_MIN_LENGTH = 3;
 const USERNAME_MAX_LENGTH = 25;
@@ -57,6 +58,16 @@ export class UserValidator
       throw new BadRequestException(
         `Profession must be between ${PROFESSION_MIN_LENGTH} and ${PROFESSION_MAX_LENGTH} characters long.`,
       );
+    }
+  }
+
+  validateLogin(dto: LoginUserDto): void {
+    if (!dto.name || dto.name.trim().length === 0) {
+      throw new BadRequestException('Name is required.');
+    }
+
+    if (!dto.password || dto.password.trim().length === 0) {
+      throw new BadRequestException('Password is required.');
     }
   }
 }
