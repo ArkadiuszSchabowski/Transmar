@@ -4,7 +4,7 @@ export class UserEntity {
   @Expose()
   id!: number;
   @Expose()
-  username!: string;
+  name!: string;
   @Expose()
   passwordHash!: string;
   @Expose()

@@ -1,0 +1,52 @@
+<div id="home-container" class="container">
+  <form [formGroup]="form" (ngSubmit)="login()" autocomplete="off" id="login-form">
+    <mat-card id="mat-card-login">
+      <div id="card-title">
+        <h1>Welcome to the login module!</h1>
+        <h2>Log in to your account to access the assembly line manager.</h2>
+      </div>
+      <mat-card-content id="mat-card-content-login">
+        <mat-form-field appearance="outline" class="mat-form-field">
+          <mat-label>Username</mat-label>
+          <input class="input" matInput name="name" formControlName="name" />
+          @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+            <mat-error>Username is required.</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="mat-form-field">
+          <mat-label>Password</mat-label>
+          <input
+            class="input"
+            matInput
+            [type]="hidePassword() ? 'password' : 'text'"
+            name="password"
+            formControlName="password"
+          />
+          <button
+            type="button"
+            class="password-button"
+            mat-icon-button
+            matSuffix
+            (click)="changePasswordVisibility($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword()"
+          >
+            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
+            <mat-error> Password is required. </mat-error>
+          }
+        </mat-form-field>
+        <div id="submit-button-container">
+          <button
+            mat-raised-button
+            id="submit-login-button"
+            type="submit"
+          >
+            Log in
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>

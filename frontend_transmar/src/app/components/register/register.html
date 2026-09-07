@@ -1,0 +1,98 @@
+<div id="home-container" class="container">
+  <form [formGroup]="form" (ngSubmit)="register()" autocomplete="off" id="register-form">
+    <mat-card id="mat-card-register">
+      <div id="card-title">
+        <h1>Welcome to the registration module!</h1>
+        <h2>Register to get access to the assembly line manager.</h2>
+      </div>
+      <mat-card-content id="mat-card-content-register">
+        <mat-form-field appearance="outline" class="mat-form-field">
+          <mat-label>Username</mat-label>
+          <input class="input" matInput name="name" formControlName="name" />
+          @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+            <mat-error>Username is required.</mat-error>
+          }
+          @if (
+            (form.get('name')?.hasError('minlength') && form.get('name')?.touched) ||
+            (form.get('name')?.hasError('maxlength') && form.get('name')?.touched)
+          ) {
+            <mat-error>Username must be 3 to 25 characters.</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="mat-form-field">
+          <mat-label>Password</mat-label>
+          <input
+            class="input"
+            matInput
+            [type]="hidePassword() ? 'password' : 'text'"
+            name="password"
+            formControlName="password"
+          />
+          <button
+            type="button"
+            class="password-button"
+            mat-icon-button
+            matSuffix
+            (click)="changePasswordVisibility($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hidePassword()"
+          >
+            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (form.get('password')?.hasError('required') && form.get('password')?.touched) {
+            <mat-error>Password is required.</mat-error>
+          }
+
+          @if (
+            (form.get('password')?.hasError('minlength') && form.get('password')?.touched) ||
+            (form.get('password')?.hasError('maxlength') && form.get('password')?.touched)
+          ) {
+            <mat-error>Password must be 5-25 characters.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="card-input" appearance="outline">
+          <mat-label>Repeat password</mat-label>
+          <input
+            matInput
+            [type]="hideRepeatPassword() ? 'password' : 'text'"
+            formControlName="repeatPassword"
+          />
+          <button
+            type="button"
+            class="password-button"
+            mat-icon-button
+            matSuffix
+            (click)="changeRepeatPasswordVisibility($event)"
+            [attr.aria-label]="'Show or hide repeated password'"
+          >
+            <mat-icon>
+              {{ hideRepeatPassword() ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+          </button>
+
+          @if (
+            form.get('repeatPassword')?.hasError('required') && form.get('repeatPassword')?.touched
+          ) {
+            <mat-error>Repeat your password.</mat-error>
+          }
+
+          @if (
+            (form.get('repeatPassword')?.hasError('minlength') &&
+              form.get('repeatPassword')?.touched) ||
+            (form.get('repeatPassword')?.hasError('maxlength') &&
+              form.get('repeatPassword')?.touched)
+          ) {
+            <mat-error>Password must be 5-25 characters.</mat-error>
+          }
+        </mat-form-field>
+
+        <div id="submit-button-container">
+          <button mat-raised-button id="submit-register-button" type="submit">
+            Register
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
