@@ -1,14 +1,16 @@
 @use '@angular/material' as mat;
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$blue-palette,
-      tertiary: mat.$red-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$blue-palette,
+        tertiary: mat.$red-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
 }
 
 body {
@@ -19,8 +21,14 @@ body {
   margin: 0;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 .container {
   display: flex;
@@ -29,11 +37,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100%;
   min-width: 320px;
   max-width: 100%;
-  min-height: calc(100vh - 40px);
-  padding: 20px 0;
+  min-height: calc(100vh - 56px);
   background-color: rgb(182, 182, 253);
 }
 
-.mat-form-field{
-    padding: 5px 0;
+.mat-form-field {
+  padding: 5px 20px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    min-height: calc(100vh - 64px);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    min-height: calc(100vh - 64px);
+  }
 }

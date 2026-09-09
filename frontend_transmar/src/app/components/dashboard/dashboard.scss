@@ -1,0 +1,54 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+#dashboard-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+}
+
+#card-image-product {
+  background-image: url(../../../assets/dashboard/product.webp);
+}
+
+#card-image-assembly-line {
+  background-image: url(../../../assets/dashboard/assembly-line.webp);
+}
+
+#card-image-workstation {
+  background-image: url(../../../assets/dashboard/workstation.webp);
+}
+
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 400px;
+  color: map.get(mat.$blue-palette, 40);
+  background-color: #ffc24b;
+  cursor: pointer;
+  font-size: 24px;
+  margin: 20px 50px;
+}
+
+.mat-card-title {
+  font-weight: bold;
+}
+
+.dashboard-card:hover {
+  background-color: #fcb831;
+}
+
+.card-image {
+  display: flex;
+  width: 260px;
+  height: 260px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  margin: 20px 0;
+}
