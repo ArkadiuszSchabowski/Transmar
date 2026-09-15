@@ -76,13 +76,10 @@ export class ProductService implements ServiceContract<
       throw new NotFoundException(`Product with id ${id} not found.`);
     }
 
-    const updatedProduct = plainToInstance(
-      ProductEntity,
-      {
-        ...product,
-        ...data,
-      },
-    );
+    const updatedProduct = plainToInstance(ProductEntity, {
+      ...product,
+      ...data,
+    });
 
     try {
       const updated = await this.productRepository.update(id, updatedProduct);
@@ -106,6 +103,12 @@ export class ProductService implements ServiceContract<
     const product = await this.productRepository.getById(id);
     if (!product) {
       throw new NotFoundException(`Product with id ${id} not found.`);
+    }
+
+    if (product.assemblyLines.length > 0) {
+      throw new ConflictException(
+        `Product with id ${id} cannot be removed because it has assigned assembly lines.`,
+      );
     }
 
     await this.productRepository.remove(id);
