@@ -5,7 +5,7 @@
   display: flex;
   width: 100%;
   min-width: 320px;
-  background-color: #ffc24b;
+  background-color: white;
   border-bottom: 2px solid map.get(mat.$blue-palette, 40);
 }
 
@@ -19,10 +19,10 @@
   color: map.get(mat.$blue-palette, 40);
   font-size: 22px;
   font-weight: bold;
-  background-color: #ffc24b;
+  background-color: white;
   border: none;
 }
 
 .navbar-button:hover {
-  background-color: #fcb831;
+  background-color: whitesmoke;
 }

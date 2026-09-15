@@ -30,7 +30,7 @@
   width: 100%;
   height: auto;
   margin-bottom: 20px;
-  background-color: #ffc24b;
+  background-color: white;
   padding: 20px;
 }
 
@@ -54,7 +54,7 @@
 .add-assembly-line-container-form, .add-assembly-line-container-card {
   display: flex;
   flex-direction: column;
-  background-color: #ffc24b;
+  background-color: white;
 }
 
 .add-assembly-line-container-card{
@@ -74,7 +74,7 @@
   justify-content: center;
   align-items: center;
   height: auto;
-  background-color: #ffc24b;
+  background-color: white;
   margin-bottom: 5px;
 }
 .assembly-line-id {
@@ -99,5 +99,5 @@
 }
 
 .button-standard {
-  background-color: #ffc24b !important;
+  background-color: white !important; 
 }
