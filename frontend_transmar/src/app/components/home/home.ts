@@ -9,6 +9,8 @@ import { UserService } from '../../_services/user-service';
 import { ToastrService } from 'ngx-toastr';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { AuthService } from '../../_services/auth-service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +31,7 @@ export class Home {
   private toastr = inject(ToastrService);
   private userService = inject(UserService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   form: any = this.fb.group({
     name: ['', [Validators.required]],
@@ -54,9 +57,10 @@ export class Home {
     };
 
     this.userService.login(dto).subscribe({
-      next: () => {
+      next: (response) => {
         this.toastr.success('Logged in successfully.');
         this.router.navigateByUrl('dashboard');
+        this.authService.setUser(response.token);
       },
       error: (error) => {
         if (error.status === 401) {
