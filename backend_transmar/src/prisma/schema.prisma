@@ -36,8 +36,8 @@ model AssemblyLineWorkstation {
   assemblyLineId Int
   workstationId  Int
   order          Int
-  assemblyLine   AssemblyLine @relation(fields: [assemblyLineId], references: [id])
-  workstation    Workstation  @relation(fields: [workstationId], references: [id])
+  assemblyLine   AssemblyLine @relation(fields: [assemblyLineId], references: [id], onDelete: Cascade)
+  workstation    Workstation  @relation(fields: [workstationId], references: [id], onDelete: Cascade)
 
   @@unique([assemblyLineId, workstationId])
 }
