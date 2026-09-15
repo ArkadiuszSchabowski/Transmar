@@ -1,0 +1,104 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+#assembly-line-list-container {
+  width: 100%;
+  height: auto;
+  color: map.get(mat.$blue-palette, 40);
+  font-weight: bold;
+  padding: 0;
+}
+
+#add-assembly-line-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+#add-button{
+  margin-top: 20px;
+}
+
+#panel-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 20px 0;
+}
+
+#filter-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.add-assembly-line-container-div{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 20px 0;
+  padding: 20px 0;
+}
+
+.add-assembly-line-container-form, .add-assembly-line-container-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.add-assembly-line-container-card{
+  display: flex;
+  width: 300px;
+}
+
+.add-assembly-line-container-card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.assembly-line-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: white;
+  margin-bottom: 5px;
+}
+.assembly-line-id {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.assembly-line-name {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  height: auto;
+}
+
+.assembly-line-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: auto;
+}
+
+.button-standard {
+  background-color: white !important; 
+}

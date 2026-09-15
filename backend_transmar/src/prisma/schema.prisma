@@ -36,15 +36,15 @@ model AssemblyLineWorkstation {
   assemblyLineId Int
   workstationId  Int
   order          Int
-  assemblyLine   AssemblyLine @relation(fields: [assemblyLineId], references: [id])
-  workstation    Workstation  @relation(fields: [workstationId], references: [id])
+  assemblyLine   AssemblyLine @relation(fields: [assemblyLineId], references: [id], onDelete: Cascade)
+  workstation    Workstation  @relation(fields: [workstationId], references: [id], onDelete: Cascade)
 
   @@unique([assemblyLineId, workstationId])
 }
 
 model User {
   id           Int     @id @default(autoincrement())
-  username     String  @unique
+  name     String  @unique
   passwordHash String
   profession   String?
 }

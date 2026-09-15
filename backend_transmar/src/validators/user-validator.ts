@@ -16,17 +16,17 @@ export class UserValidator
   implements ValidatorContract<AddUserDto>, ProfessionContract
 {
   validateDto(dto: AddUserDto): void {
-    if (!dto.username || dto.username.trim().length === 0) {
-      throw new BadRequestException('Username is required.');
+    if (!dto.name || dto.name.trim().length === 0) {
+      throw new BadRequestException('Name is required.');
     }
 
-    const trimmedUsername = dto.username.trim();
+    const trimmedUsername = dto.name.trim();
     if (
       trimmedUsername.length < USERNAME_MIN_LENGTH ||
       trimmedUsername.length > USERNAME_MAX_LENGTH
     ) {
       throw new BadRequestException(
-        `Username must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters long.`,
+        `Name must be between ${USERNAME_MIN_LENGTH} and ${USERNAME_MAX_LENGTH} characters long.`,
       );
     }
 
@@ -41,6 +41,14 @@ export class UserValidator
       throw new BadRequestException(
         `Password must be between ${PASSWORD_MIN_LENGTH} and ${PASSWORD_MAX_LENGTH} characters long.`,
       );
+    }
+
+    if (!dto.repeatPassword) {
+      throw new BadRequestException('Repeat password is required.');
+    }
+
+    if (dto.password !== dto.repeatPassword) {
+      throw new BadRequestException('Passwords do not match.');
     }
   }
 

@@ -9,15 +9,13 @@ export class UserRepository
   implements RepositoryContract<User>, GetByName<User>
 {
   constructor(private readonly prisma: PrismaService) {}
-  getByName(
-    username: string,
-  ): Promise<{
+  getByName(name: string): Promise<{
     id: number;
-    username: string;
+    name: string;
     passwordHash: string;
     profession: string | null;
   } | null> {
-    return this.prisma.user.findUnique({ where: { username } });
+    return this.prisma.user.findUnique({ where: { name } });
   }
 
   async add(dto: User): Promise<void> {

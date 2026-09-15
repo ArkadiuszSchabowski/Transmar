@@ -1,0 +1,84 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+#workstation-list-container {
+  width: 100%;
+  height: auto;
+  color: map.get(mat.$blue-palette, 40);
+  font-weight: bold;
+}
+
+#add-workstation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  background-color: white;
+}
+
+#add-button{
+  margin-top: 20px;
+}
+
+.add-workstation-container-div{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.add-workstation-container-form, .add-workstation-container-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white !important;
+}
+
+.add-workstation-container-card{
+  display: flex;
+  width: 300px;
+}
+
+.add-workstation-container-card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.workstation-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: white;
+  margin-bottom: 5px;
+}
+.workstation-id {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.workstation-name {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  height: auto;
+}
+
+.workstation-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: auto;
+}
+
+.button-standard {
+  background-color: c24b !important;
+}

@@ -31,7 +31,7 @@ export class UserService implements ServiceContract<
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(dto: LoginUserDto): Promise<{ accessToken: string }> {
+  async login(dto: LoginUserDto): Promise<{ token: string }> {
     this.userValidator.validateLogin(dto);
     const user = await this.userRepository.getByName(dto.name);
 
@@ -48,10 +48,10 @@ export class UserService implements ServiceContract<
       throw new UnauthorizedException('Invalid credentials.');
     }
 
-    const payload = { sub: user.id, username: user.username };
-    const accessToken = await this.jwtService.signAsync(payload);
+    const payload = { sub: user.id, username: user.name };
+    const token = await this.jwtService.signAsync(payload);
 
-    return { accessToken };
+    return { token };
   }
 
   async add(dto: AddUserDto): Promise<void> {
@@ -75,7 +75,7 @@ export class UserService implements ServiceContract<
         error.code === 'P2002'
       ) {
         throw new ConflictException(
-          `Username '${dto.username}' is already taken.`,
+          `Name '${dto.name}' is already taken.`,
         );
       }
       throw error;

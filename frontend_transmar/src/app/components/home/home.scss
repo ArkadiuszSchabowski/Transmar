@@ -1,0 +1,58 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+#home-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 450px;
+}
+
+#mat-card-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+}
+
+#mat-card-content-login {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+#submit-button-container {
+  display: flex;
+  width: 100%;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+#submit-login-button {
+  display: flex;
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#card-title {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  color: map.get(mat.$blue-palette, 40);
+  background-color: white;
+  margin-bottom: 30px;
+}

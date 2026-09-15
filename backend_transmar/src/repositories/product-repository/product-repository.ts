@@ -9,11 +9,25 @@ export class ProductRepository implements RepositoryContract<Product> {
   async add(dto: { name: string; id: number }): Promise<void> {
     await this.prisma.product.create({ data: dto });
   }
-  async getById(id: number): Promise<{ name: string; id: number } | null> {
-    return this.prisma.product.findUnique({ where: { id } });
+  async getById(id: number): Promise<{
+    name: string;
+    id: number;
+    assemblyLines: {
+      id: number;
+      name: string;
+      active: boolean;
+      productId: number;
+    }[];
+  } | null> {
+    return this.prisma.product.findUnique({
+      where: { id },
+      include: { assemblyLines: true },
+    });
   }
   async getAll(): Promise<{ name: string; id: number }[]> {
-    return this.prisma.product.findMany();
+    return this.prisma.product.findMany({
+      orderBy: { id: 'desc' },
+    });
   }
   async update(
     id: number,

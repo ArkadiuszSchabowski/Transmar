@@ -1,0 +1,11 @@
+<mat-toolbar id="toolbar">
+  @if (!(authService.token$ | async)) {
+    <button class="navbar-button" routerLink="/login">Login</button>
+    <button class="navbar-button" routerLink="/register">Register</button>
+  }
+  @if (authService.token$ | async) {
+    <button class="navbar-button" routerLink="/dashboard">Dashboard</button>
+
+    <button class="navbar-button" (click)="logout()">Logout</button>
+  }
+</mat-toolbar>
