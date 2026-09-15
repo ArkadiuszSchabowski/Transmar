@@ -6,8 +6,7 @@
   height: auto;
   color: map.get(mat.$blue-palette, 40);
   font-weight: bold;
-  margin-top: 20px;
-  padding: 10px 0;
+  padding: 0;
 }
 
 #add-assembly-line-container {
@@ -17,11 +16,30 @@
   align-items: center;
   width: 100%;
   height: auto;
-  margin-bottom: 20px;
 }
 
 #add-button{
   margin-top: 20px;
+}
+
+#panel-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  background-color: #ffc24b;
+  padding: 20px;
+}
+
+#filter-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: auto;
 }
 
 .add-assembly-line-container-div{
@@ -36,7 +54,7 @@
 .add-assembly-line-container-form, .add-assembly-line-container-card {
   display: flex;
   flex-direction: column;
-  background-color: #ffc24b !important;
+  background-color: #ffc24b;
 }
 
 .add-assembly-line-container-card{
@@ -82,8 +100,4 @@
 
 .button-standard {
   background-color: #ffc24b !important;
-}
-
-.button-standard-reverse-color {
-  background-color: rgb(182, 182, 253) !important;
 }

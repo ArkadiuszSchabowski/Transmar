@@ -44,6 +44,7 @@ export class AssemblyLineList implements OnInit {
   assemblyLines: GetAssemblyLineDto[] = [];
   products: GetProductDto[] = [];
   isAddingAssemblyLine: boolean = false;
+  selectedProductId: number | null = null;
 
   private readonly defaultFormValue = {
     name: '',
@@ -57,9 +58,17 @@ export class AssemblyLineList implements OnInit {
     productId: [null, [Validators.required]],
   });
 
+    getAssemblyLineForm: any = this.fb.group({
+    name: [null],
+  });
   ngOnInit(): void {
     this.getProducts();
     this.getAssemblyLines();
+  }
+
+  onFilterChange() {
+    // opcjonalnie: zapis filtra w query params, np.
+    // this.router.navigate([], { queryParams: { productId: this.selectedProductId }, queryParamsHandling: 'merge' });
   }
 
   getProducts() {

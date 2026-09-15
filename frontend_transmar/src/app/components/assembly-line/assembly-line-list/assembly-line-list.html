@@ -1,79 +1,96 @@
 <div class="container">
   <div id="assembly-line-list-container">
-    <div id="add-assembly-line-container">
-      <button mat-raised-button class="button-standard" (click)="changeFormVisibility()">
-        Add new assembly line
-      </button>
-
-      @if (isAddingAssemblyLine) {
-        <div class="add-assembly-line-container-div">
-          <form
-            class="add-assembly-line-container-form"
-            [formGroup]="addAssemblyLineForm"
-            (ngSubmit)="onSubmit()"
+    <div id="panel-container">
+      <form id="filter-container" [formGroup]="getAssemblyLineForm" (ngSubmit)="getProducts()">
+        <mat-form-field class="filter-field">
+          <mat-label>Select products:</mat-label>
+          <mat-select id="name" formControlName="name">
+            @for (product of products; track product.id) {
+              <mat-option [value]="product.id">{{ product.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </form>
+      <div id="add-assembly-line-container">
+        @if (!isAddingAssemblyLine) {
+          <button
+            mat-raised-button
+            class="button-reverse-color"
+            (click)="changeFormVisibility()"
           >
-            <mat-card class="add-assembly-line-container-card">
-              <mat-card-content class="add-assembly-line-container-card-content">
-                <mat-form-field
-                  class="add-assembly-line-form-field"
-                  appearance="outline"
-                  style="width: 100%"
-                >
-                  <mat-label>Assembly line name</mat-label>
-                  <input matInput formControlName="name" />
+            Add new assembly line
+          </button>
+        }
 
-                  @if (
-                    addAssemblyLineForm.get('name')?.hasError('required') &&
-                    addAssemblyLineForm.get('name')?.touched
-                  ) {
-                    <mat-error>Assembly line name is required.</mat-error>
-                  }
-                  @if (
-                    (addAssemblyLineForm.get('name')?.hasError('minlength') ||
-                      addAssemblyLineForm.get('name')?.hasError('maxlength')) &&
-                    addAssemblyLineForm.get('name')?.touched
-                  ) {
-                    <mat-error>Assembly line name should be between 3 and 25 characters.</mat-error>
-                  }
-                </mat-form-field>
-
-                <mat-form-field
-                  class="add-assembly-line-form-field"
-                  appearance="outline"
-                  style="width: 100%"
+        @if (isAddingAssemblyLine) {
+          <div class="add-assembly-line-container-div">
+            <form
+              class="add-assembly-line-container-form"
+              [formGroup]="addAssemblyLineForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <mat-card class="add-assembly-line-container-card">
+                <mat-card-content
+                  class="add-assembly-line-container-card-content"
                 >
-                  <mat-label>Product</mat-label>
-                  <mat-select formControlName="productId">
-                    @for (product of products; track product.id) {
-                      <mat-option [value]="product.id">{{ product.name }}</mat-option>
+                  <mat-form-field
+                    class="add-assembly-line-form-field mat-form-field-bottom"
+                    appearance="outline"
+                    style="width: 100%"
+                  >
+                    <mat-label>Assembly line name</mat-label>
+                    <input matInput formControlName="name" />
+
+                    @if (
+                      addAssemblyLineForm.get('name')?.hasError('required') &&
+                      addAssemblyLineForm.get('name')?.touched
+                    ) {
+                      <mat-error>Assembly line name is required.</mat-error>
                     }
-                  </mat-select>
+                    @if (
+                      (addAssemblyLineForm.get('name')?.hasError('minlength') ||
+                        addAssemblyLineForm.get('name')?.hasError('maxlength')) &&
+                      addAssemblyLineForm.get('name')?.touched
+                    ) {
+                      <mat-error
+                        >Assembly line name should be between 3 and 25 characters.</mat-error
+                      >
+                    }
+                  </mat-form-field>
 
-                  @if (
-                    addAssemblyLineForm.get('productId')?.hasError('required') &&
-                    addAssemblyLineForm.get('productId')?.touched
-                  ) {
-                    <mat-error>Product is required.</mat-error>
-                  }
-                </mat-form-field>
+                  <mat-form-field
+                    class="add-assembly-line-form-field mat-form-field-bottom"
+                    appearance="outline"
+                    style="width: 100%"
+                  >
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="productId">
+                      @for (product of products; track product.id) {
+                        <mat-option [value]="product.id">{{ product.name }}</mat-option>
+                      }
+                    </mat-select>
 
-                <div class="add-assembly-line-active-toggle" style="margin-bottom: 16px">
-                  <mat-slide-toggle formControlName="active"> Active </mat-slide-toggle>
-                </div>
+                    @if (
+                      addAssemblyLineForm.get('productId')?.hasError('required') &&
+                      addAssemblyLineForm.get('productId')?.touched
+                    ) {
+                      <mat-error>Product is required.</mat-error>
+                    }
+                  </mat-form-field>
 
-                <button
-                  mat-raised-button
-                  id="add-button"
-                  class="button-standard-reverse-color"
-                  type="submit"
-                >
-                  Add assembly line
-                </button>
-              </mat-card-content>
-            </mat-card>
-          </form>
-        </div>
-      }
+                  <div class="add-assembly-line-active-toggle" style="margin-bottom: 16px">
+                    <mat-slide-toggle formControlName="active"> Active </mat-slide-toggle>
+                  </div>
+
+                  <button mat-raised-button id="add-button" class="button-reverse-color" type="submit">
+                    Add assembly line
+                  </button>
+                </mat-card-content>
+              </mat-card>
+            </form>
+          </div>
+        }
+      </div>
     </div>
 
     @if (assemblyLines.length > 0) {

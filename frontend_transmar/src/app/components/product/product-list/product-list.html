@@ -1,9 +1,11 @@
 <div class="container">
   <div id="product-list-container">
     <div id="add-product-container">
-      <button mat-raised-button class="button-standard" (click)="changeFormVisibility()">
-        Add new product
-      </button>
+      @if (!isAddingProduct) {
+        <button mat-raised-button class="button-reverse-color" (click)="changeFormVisibility()">
+          Add new product
+        </button>
+      }
 
       @if (isAddingProduct) {
         <div class="add-product-container-div">
@@ -40,7 +42,7 @@
                 <button
                   mat-raised-button
                   id="add-button"
-                  class="button-standard-reverse-color"
+                  class="button-reverse-color"
                   type="submit"
                 >
                   Add product

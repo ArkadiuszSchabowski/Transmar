@@ -4,10 +4,7 @@
 #product-list-container {
   width: 100%;
   height: auto;
-  color: map.get(mat.$blue-palette, 40);
   font-weight: bold;
-  margin-top: 20px;
-  padding: 10px 0;
 }
 
 #add-product-container {
@@ -18,6 +15,8 @@
   width: 100%;
   height: auto;
   margin-bottom: 20px;
+  padding: 20px 0;
+  background-color: #ffc24b;
 }
 
 #add-button{
@@ -36,7 +35,7 @@
 .add-product-container-form, .add-product-container-card {
   display: flex;
   flex-direction: column;
-  background-color: #ffc24b !important;
+  background-color: #ffc24b;
 }
 
 .add-product-container-card{
@@ -82,8 +81,4 @@
 
 .button-standard {
   background-color: #ffc24b !important;
-}
-
-.button-standard-reverse-color {
-  background-color: rgb(182, 182, 253) !important;
 }

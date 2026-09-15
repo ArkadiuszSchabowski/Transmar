@@ -54,6 +54,15 @@ mat-icon.remove {
   padding: 5px 20px;
 }
 
+.mat-form-field-bottom{
+  padding-bottom: px;
+}
+
+.button-reverse-color {
+  color: #ffc24b !important;
+  background-color: blue !important;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .container {
     min-height: calc(100vh - 64px);

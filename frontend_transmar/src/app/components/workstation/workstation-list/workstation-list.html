@@ -1,9 +1,11 @@
 <div class="container">
   <div id="workstation-list-container">
     <div id="add-workstation-container">
-      <button mat-raised-button class="button-standard" (click)="changeFormVisibility()">
+            @if (!isAddingWorkstation) {
+      <button mat-raised-button class="button-reverse-color" (click)="changeFormVisibility()">
         Add new workstation
       </button>
+    }
 
       @if (isAddingWorkstation) {
         <div class="add-workstation-container-div">
@@ -15,7 +17,7 @@
             <mat-card class="add-workstation-container-card">
               <mat-card-content class="add-workstation-container-card-content">
                 <mat-form-field
-                  class="add-workstation-form-field"
+                  class="add-workstation-form-field mat-form-field-bottom"
                   appearance="outline"
                   style="width: 100%"
                 >
@@ -38,7 +40,7 @@
                 </mat-form-field>
 
                 <mat-form-field
-                  class="add-workstation-form-field"
+                  class="add-workstation-form-field mat-form-field-bottom"
                   appearance="outline"
                   style="width: 100%"
                 >
@@ -61,7 +63,7 @@
                 </mat-form-field>
 
                 <mat-form-field
-                  class="add-workstation-form-field"
+                  class="add-workstation-form-field mat-form-field-bottom"
                   appearance="outline"
                   style="width: 100%"
                 >
@@ -86,7 +88,7 @@
                 <button
                   mat-raised-button
                   id="add-button"
-                  class="button-standard-reverse-color"
+                  class="button-reverse-color"
                   type="submit"
                 >
                   Add workstation
