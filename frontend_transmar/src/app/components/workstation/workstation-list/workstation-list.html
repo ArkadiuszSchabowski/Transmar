@@ -1,0 +1,123 @@
+<div class="container">
+  <div id="workstation-list-container">
+    <div id="add-workstation-container">
+      <button mat-raised-button class="button-standard" (click)="changeFormVisibility()">
+        Add new workstation
+      </button>
+
+      @if (isAddingWorkstation) {
+        <div class="add-workstation-container-div">
+          <form
+            class="add-workstation-container-form"
+            [formGroup]="addWorkstationForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <mat-card class="add-workstation-container-card">
+              <mat-card-content class="add-workstation-container-card-content">
+                <mat-form-field
+                  class="add-workstation-form-field"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>Workstation name</mat-label>
+                  <input matInput formControlName="name" />
+
+                  @if (
+                    addWorkstationForm.get('name')?.hasError('required') &&
+                    addWorkstationForm.get('name')?.touched
+                  ) {
+                    <mat-error>Workstation name is required.</mat-error>
+                  }
+                  @if (
+                    (addWorkstationForm.get('name')?.hasError('minlength') ||
+                      addWorkstationForm.get('name')?.hasError('maxlength')) &&
+                    addWorkstationForm.get('name')?.touched
+                  ) {
+                    <mat-error>Workstation name should be between 3 and 25 characters.</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field
+                  class="add-workstation-form-field"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>Short name</mat-label>
+                  <input matInput formControlName="shortName" />
+
+                  @if (
+                    addWorkstationForm.get('shortName')?.hasError('required') &&
+                    addWorkstationForm.get('shortName')?.touched
+                  ) {
+                    <mat-error>Short name is required.</mat-error>
+                  }
+                  @if (
+                    (addWorkstationForm.get('shortName')?.hasError('minlength') ||
+                      addWorkstationForm.get('shortName')?.hasError('maxlength')) &&
+                    addWorkstationForm.get('shortName')?.touched
+                  ) {
+                    <mat-error>Short name should be between 2 and 10 characters.</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field
+                  class="add-workstation-form-field"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>PC name</mat-label>
+                  <input matInput formControlName="pcName" />
+
+                  @if (
+                    addWorkstationForm.get('pcName')?.hasError('required') &&
+                    addWorkstationForm.get('pcName')?.touched
+                  ) {
+                    <mat-error>PC name is required.</mat-error>
+                  }
+                  @if (
+                    (addWorkstationForm.get('pcName')?.hasError('minlength') ||
+                      addWorkstationForm.get('pcName')?.hasError('maxlength')) &&
+                    addWorkstationForm.get('pcName')?.touched
+                  ) {
+                    <mat-error>PC name should be between 3 and 15 characters.</mat-error>
+                  }
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  id="add-button"
+                  class="button-standard-reverse-color"
+                  type="submit"
+                >
+                  Add workstation
+                </button>
+              </mat-card-content>
+            </mat-card>
+          </form>
+        </div>
+      }
+    </div>
+
+    @if (workstations.length > 0) {
+      @for (workstation of workstations; track workstation.id) {
+        <div class="workstation-item">
+          <span class="workstation-id">{{ workstation.id }}</span>
+          <span class="workstation-name">{{ workstation.name }}</span>
+          <span class="workstation-name">{{ workstation.shortName }}</span>
+          <span class="workstation-name">{{ workstation.pcName }}</span>
+
+          <div class="workstation-actions">
+            <button mat-icon-button (click)="editItem(workstation)" aria-label="edit">
+              <mat-icon class="edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteItem(workstation.id)" aria-label="remove">
+              <mat-icon class="remove">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="add-workstation-container-div"><p>No workstations to display.</p></div>
+    }
+  </div>
+</div>

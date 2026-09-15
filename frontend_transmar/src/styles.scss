@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 
 html {
@@ -28,6 +29,14 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+mat-icon.edit {
+  color: map.get(mat.$blue-palette, 40);
+}
+
+mat-icon.remove {
+  color: map.get(mat.$blue-palette, 40);
 }
 
 .container {

@@ -15,13 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   login(dto: LoginDto) {
-    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto).pipe(
-      tap((response) => {
-        if (!response.token) {
-          return;
-        }
-      }),
-    );
+    return this.http.post<TokenDto>(this.apiUrl + 'user/login', dto);
   }
 
   register(dto: RegisterDto) {

@@ -1,0 +1,101 @@
+<div class="container">
+  <div id="assembly-line-list-container">
+    <div id="add-assembly-line-container">
+      <button mat-raised-button class="button-standard" (click)="changeFormVisibility()">
+        Add new assembly line
+      </button>
+
+      @if (isAddingAssemblyLine) {
+        <div class="add-assembly-line-container-div">
+          <form
+            class="add-assembly-line-container-form"
+            [formGroup]="addAssemblyLineForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <mat-card class="add-assembly-line-container-card">
+              <mat-card-content class="add-assembly-line-container-card-content">
+                <mat-form-field
+                  class="add-assembly-line-form-field"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>Assembly line name</mat-label>
+                  <input matInput formControlName="name" />
+
+                  @if (
+                    addAssemblyLineForm.get('name')?.hasError('required') &&
+                    addAssemblyLineForm.get('name')?.touched
+                  ) {
+                    <mat-error>Assembly line name is required.</mat-error>
+                  }
+                  @if (
+                    (addAssemblyLineForm.get('name')?.hasError('minlength') ||
+                      addAssemblyLineForm.get('name')?.hasError('maxlength')) &&
+                    addAssemblyLineForm.get('name')?.touched
+                  ) {
+                    <mat-error>Assembly line name should be between 3 and 25 characters.</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field
+                  class="add-assembly-line-form-field"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>Product</mat-label>
+                  <mat-select formControlName="productId">
+                    @for (product of products; track product.id) {
+                      <mat-option [value]="product.id">{{ product.name }}</mat-option>
+                    }
+                  </mat-select>
+
+                  @if (
+                    addAssemblyLineForm.get('productId')?.hasError('required') &&
+                    addAssemblyLineForm.get('productId')?.touched
+                  ) {
+                    <mat-error>Product is required.</mat-error>
+                  }
+                </mat-form-field>
+
+                <div class="add-assembly-line-active-toggle" style="margin-bottom: 16px">
+                  <mat-slide-toggle formControlName="active"> Active </mat-slide-toggle>
+                </div>
+
+                <button
+                  mat-raised-button
+                  id="add-button"
+                  class="button-standard-reverse-color"
+                  type="submit"
+                >
+                  Add assembly line
+                </button>
+              </mat-card-content>
+            </mat-card>
+          </form>
+        </div>
+      }
+    </div>
+
+    @if (assemblyLines.length > 0) {
+      @for (assemblyLine of assemblyLines; track assemblyLine.id) {
+        <div class="assembly-line-item">
+          <span class="assembly-line-id">{{ assemblyLine.id }}</span>
+          <span class="assembly-line-name">{{ assemblyLine.name }}</span>
+          <span class="assembly-line-id">{{ assemblyLine.active }}</span>
+          <span class="assembly-line-id">{{ assemblyLine.productId }}</span>
+
+          <div class="assembly-line-actions">
+            <button mat-icon-button (click)="editItem(assemblyLine)" aria-label="edit">
+              <mat-icon class="edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteItem(assemblyLine.id)" aria-label="remove">
+              <mat-icon class="remove">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="add-assembly-line-container-div"><p>No assembly lines to display.</p></div>
+    }
+  </div>
+</div>

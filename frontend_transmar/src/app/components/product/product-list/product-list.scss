@@ -1,0 +1,89 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+#product-list-container {
+  width: 100%;
+  height: auto;
+  color: map.get(mat.$blue-palette, 40);
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+
+#add-product-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+#add-button{
+  margin-top: 20px;
+}
+
+.add-product-container-div{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 20px 0;
+  padding: 20px 0;
+}
+
+.add-product-container-form, .add-product-container-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffc24b !important;
+}
+
+.add-product-container-card{
+  display: flex;
+  width: 300px;
+}
+
+.add-product-container-card-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  background-color: #ffc24b;
+  margin-bottom: 5px;
+}
+.product-id {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.product-name {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  height: auto;
+}
+
+.product-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: auto;
+}
+
+.button-standard {
+  background-color: #ffc24b !important;
+}
+
+.button-standard-reverse-color {
+  background-color: rgb(182, 182, 253) !important;
+}

@@ -1,0 +1,75 @@
+<div class="container">
+  <div id="product-list-container">
+    <div id="add-product-container">
+      <button mat-raised-button class="button-standard" (click)="changeFormVisibility()">
+        Add new product
+      </button>
+
+      @if (isAddingProduct) {
+        <div class="add-product-container-div">
+          <form
+            class="add-product-container-form"
+            [formGroup]="addProductForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <mat-card class="add-product-container-card">
+              <mat-card-content class="add-product-container-card-content">
+                <mat-form-field
+                  class="add-product-form-field"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>Product name</mat-label>
+                  <input matInput formControlName="name" />
+
+                  @if (
+                    addProductForm.get('name')?.hasError('required') &&
+                    addProductForm.get('name')?.touched
+                  ) {
+                    <mat-error>Product name is required.</mat-error>
+                  }
+                  @if (
+                    (addProductForm.get('name')?.hasError('minlength') ||
+                      addProductForm.get('name')?.hasError('maxlength')) &&
+                    addProductForm.get('name')?.touched
+                  ) {
+                    <mat-error>Product name should be between 3 and 25 characters.</mat-error>
+                  }
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  id="add-button"
+                  class="button-standard-reverse-color"
+                  type="submit"
+                >
+                  Add product
+                </button>
+              </mat-card-content>
+            </mat-card>
+          </form>
+        </div>
+      }
+    </div>
+
+    @if (products.length > 0) {
+      @for (product of products; track product.id) {
+        <div class="product-item">
+          <span class="product-id">{{ product.id }}</span>
+          <span class="product-name">{{ product.name }}</span>
+
+          <div class="product-actions">
+            <button mat-icon-button (click)="editItem(product)" aria-label="edit">
+              <mat-icon class="edit">edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteItem(product.id)" aria-label="remove">
+              <mat-icon class="remove">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="add-product-container-div"><p>No products to display.</p></div>
+    }
+  </div>
+</div>
