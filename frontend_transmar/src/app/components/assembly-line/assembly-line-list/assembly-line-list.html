@@ -1,25 +1,6 @@
 <div class="container">
   <div id="assembly-line-list-container">
     <div id="panel-container">
-      <form
-        id="filter-container"
-        [formGroup]="getAssemblyLineForm"
-        (ngSubmit)="getProductsByName(getAssemblyLineForm.value.name)"
-      >
-        <mat-form-field class="filter-field">
-          <mat-label>Select products:</mat-label>
-          <mat-select
-            id="name"
-            formControlName="name"
-            (selectionChange)="getProductsByName($event.value)"
-          >
-            <mat-option [value]="null">All products</mat-option>
-            @for (product of products; track product.id) {
-              <mat-option [value]="product.name">{{ product.name }}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      </form>
       <div id="add-assembly-line-container">
         @if (!isAddingAssemblyLine) {
           <button mat-raised-button class="button-reverse-color" (click)="changeFormVisibility()">
@@ -99,6 +80,25 @@
           </div>
         }
       </div>
+            <form
+        id="filter-container"
+        [formGroup]="getAssemblyLineForm"
+        (ngSubmit)="getProductsByName(getAssemblyLineForm.value.name)"
+      >
+        <mat-form-field class="filter-field">
+          <mat-label>Select products:</mat-label>
+          <mat-select
+            id="name"
+            formControlName="name"
+            (selectionChange)="getProductsByName($event.value)"
+          >
+            <mat-option [value]="null">All products</mat-option>
+            @for (product of products; track product.id) {
+              <mat-option [value]="product.name">{{ product.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </form>
     </div>
 
     @if (assemblyLines.length > 0) {

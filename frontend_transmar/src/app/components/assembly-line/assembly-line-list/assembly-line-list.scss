@@ -24,14 +24,14 @@
 
 #panel-container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: auto;
   margin-bottom: 20px;
   background-color: white;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 #filter-container{
@@ -40,6 +40,7 @@
   align-items: center;
   width: 50%;
   height: auto;
+  margin-top: 20px;
 }
 
 .add-assembly-line-container-div{
