@@ -21,6 +21,12 @@ export class AssemblyLineService {
     return this.http.get<GetAssemblyLineDto[]>(this.apiUrl + 'assembly-line');
   }
 
+  getByProduct(productName: string | null) {
+    return this.http.get<GetAssemblyLineDto[]>(
+      this.apiUrl + 'assembly-line/by-product/' + productName,
+    );
+  }
+
   getById(id: number) {
     return this.http.get<GetAssemblyLineDto | null>(this.apiUrl + 'assembly-line/' + id);
   }

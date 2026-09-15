@@ -44,7 +44,6 @@ export class AssemblyLineList implements OnInit {
   assemblyLines: GetAssemblyLineDto[] = [];
   products: GetProductDto[] = [];
   isAddingAssemblyLine: boolean = false;
-  selectedProductId: number | null = null;
 
   private readonly defaultFormValue = {
     name: '',
@@ -58,17 +57,13 @@ export class AssemblyLineList implements OnInit {
     productId: [null, [Validators.required]],
   });
 
-    getAssemblyLineForm: any = this.fb.group({
+  getAssemblyLineForm: any = this.fb.group({
     name: [null],
   });
+
   ngOnInit(): void {
     this.getProducts();
     this.getAssemblyLines();
-  }
-
-  onFilterChange() {
-    // opcjonalnie: zapis filtra w query params, np.
-    // this.router.navigate([], { queryParams: { productId: this.selectedProductId }, queryParamsHandling: 'merge' });
   }
 
   getProducts() {
@@ -76,6 +71,22 @@ export class AssemblyLineList implements OnInit {
       next: (response) => {
         this.products = response;
         console.log(this.products);
+        this.cdr.detectChanges();
+      },
+      error: () => console.error('server error.'),
+    });
+  }
+
+  getProductsByName(name: string | null) {
+    console.log(name);
+    if (!name) {
+      this.getAssemblyLines();
+      return;
+    }
+
+    this.assemblyLineService.getByProduct(name).subscribe({
+      next: (response) => {
+        this.assemblyLines = response ?? [];
         this.cdr.detectChanges();
       },
       error: () => console.error('server error.'),

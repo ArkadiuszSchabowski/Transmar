@@ -1,23 +1,28 @@
 <div class="container">
   <div id="assembly-line-list-container">
     <div id="panel-container">
-      <form id="filter-container" [formGroup]="getAssemblyLineForm" (ngSubmit)="getProducts()">
+      <form
+        id="filter-container"
+        [formGroup]="getAssemblyLineForm"
+        (ngSubmit)="getProductsByName(getAssemblyLineForm.value.name)"
+      >
         <mat-form-field class="filter-field">
           <mat-label>Select products:</mat-label>
-          <mat-select id="name" formControlName="name">
+          <mat-select
+            id="name"
+            formControlName="name"
+            (selectionChange)="getProductsByName($event.value)"
+          >
+            <mat-option [value]="null">All products</mat-option>
             @for (product of products; track product.id) {
-              <mat-option [value]="product.id">{{ product.name }}</mat-option>
+              <mat-option [value]="product.name">{{ product.name }}</mat-option>
             }
           </mat-select>
         </mat-form-field>
       </form>
       <div id="add-assembly-line-container">
         @if (!isAddingAssemblyLine) {
-          <button
-            mat-raised-button
-            class="button-reverse-color"
-            (click)="changeFormVisibility()"
-          >
+          <button mat-raised-button class="button-reverse-color" (click)="changeFormVisibility()">
             Add new assembly line
           </button>
         }
@@ -30,9 +35,7 @@
               (ngSubmit)="onSubmit()"
             >
               <mat-card class="add-assembly-line-container-card">
-                <mat-card-content
-                  class="add-assembly-line-container-card-content"
-                >
+                <mat-card-content class="add-assembly-line-container-card-content">
                   <mat-form-field
                     class="add-assembly-line-form-field mat-form-field-bottom"
                     appearance="outline"
@@ -82,7 +85,12 @@
                     <mat-slide-toggle formControlName="active"> Active </mat-slide-toggle>
                   </div>
 
-                  <button mat-raised-button id="add-button" class="button-reverse-color" type="submit">
+                  <button
+                    mat-raised-button
+                    id="add-button"
+                    class="button-reverse-color"
+                    type="submit"
+                  >
                     Add assembly line
                   </button>
                 </mat-card-content>
