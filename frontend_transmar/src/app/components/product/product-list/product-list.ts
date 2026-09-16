@@ -9,6 +9,8 @@ import { MatCard, MatCardContent } from '@angular/material/card';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ProductDialog } from '../../dialog/product-dialog/product-dialog';
 
 @Component({
   selector: 'app-product-list',
@@ -18,6 +20,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
     MatButtonModule,
     MatCard,
     MatCardContent,
+    MatDialogModule,
     MatFormField,
     MatLabel,
     MatError,
@@ -32,6 +35,7 @@ export class ProductList implements OnInit {
   private toastr = inject(ToastrService);
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
+  private dialog = inject(MatDialog);
 
   products: GetProductDto[] = [];
   isAddingProduct: boolean = false;
@@ -85,7 +89,16 @@ export class ProductList implements OnInit {
   }
 
   editItem(product: GetProductDto) {
-    console.log(product);
+    const dialogRef = this.dialog.open(ProductDialog, {
+      width: '300px',
+      data: { product },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getProducts();
+      }
+    });
   }
 
   deleteItem(id: number) {

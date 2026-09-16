@@ -76,13 +76,10 @@ export class ProductService implements ServiceContract<
       throw new NotFoundException(`Product with id ${id} not found.`);
     }
 
-    const updatedProduct = plainToInstance(ProductEntity, {
-      ...product,
-      ...data,
-    });
-
     try {
-      const updated = await this.productRepository.update(id, updatedProduct);
+      const updated = await this.productRepository.update(id, {
+        name: data.name,
+      });
       return plainToInstance(UpdateProductDto, updated, {
         excludeExtraneousValues: true,
       });

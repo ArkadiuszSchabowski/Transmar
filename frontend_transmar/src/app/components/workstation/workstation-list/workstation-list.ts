@@ -10,6 +10,8 @@ import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddWorkstationDto } from '../../../models/workstation/add-workstation-dto';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { WorkstationDialog } from '../../dialog/workstation-dialog/workstation-dialog';
 
 @Component({
   selector: 'app-workstation-list',
@@ -19,6 +21,7 @@ import { AddWorkstationDto } from '../../../models/workstation/add-workstation-d
     MatButtonModule,
     MatCard,
     MatCardContent,
+    MatDialogModule,
     MatFormField,
     MatLabel,
     MatError,
@@ -33,6 +36,7 @@ export class WorkstationList implements OnInit {
   private toastr = inject(ToastrService);
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
+  private dialog = inject(MatDialog);
 
   workstations: GetWorkstationDto[] = [];
   isAddingWorkstation: boolean = false;
@@ -92,7 +96,16 @@ export class WorkstationList implements OnInit {
   }
 
   editItem(workstation: GetWorkstationDto) {
-    console.log(workstation);
+    const dialogRef = this.dialog.open(WorkstationDialog, {
+      width: '300px',
+      data: { workstation },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getWorkstations();
+      }
+    });
   }
 
   deleteItem(id: number) {
