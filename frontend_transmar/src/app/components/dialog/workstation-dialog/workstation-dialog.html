@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>Edit workstation</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSave()">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Workstation name</mat-label>
+      <input matInput formControlName="name" />
+
+      @if (form.get('name')?.hasError('required') && form.get('name')?.touched) {
+        <mat-error>Workstation name is required.</mat-error>
+      }
+      @if (
+        (form.get('name')?.hasError('minlength') || form.get('name')?.hasError('maxlength')) &&
+        form.get('name')?.touched
+      ) {
+        <mat-error>Workstation name should be between 3 and 25 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>Short name</mat-label>
+      <input matInput formControlName="shortName" />
+
+      @if (form.get('shortName')?.hasError('required') && form.get('shortName')?.touched) {
+        <mat-error>Short name is required.</mat-error>
+      }
+      @if (
+        (form.get('shortName')?.hasError('minlength') ||
+          form.get('shortName')?.hasError('maxlength')) &&
+        form.get('shortName')?.touched
+      ) {
+        <mat-error>Short name should be between 2 and 10 characters.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label>PC name</mat-label>
+      <input matInput formControlName="pcName" />
+
+      @if (form.get('pcName')?.hasError('required') && form.get('pcName')?.touched) {
+        <mat-error>PC name is required.</mat-error>
+      }
+      @if (
+        (form.get('pcName')?.hasError('minlength') || form.get('pcName')?.hasError('maxlength')) &&
+        form.get('pcName')?.touched
+      ) {
+        <mat-error>PC name should be between 3 and 15 characters.</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()">Cancel</button>
+    <button mat-raised-button class="button-reverse-color" type="submit" [disabled]="isSaving">
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

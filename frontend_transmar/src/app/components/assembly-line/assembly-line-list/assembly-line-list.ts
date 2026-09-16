@@ -14,6 +14,8 @@ import { GetProductDto } from '../../../models/product/get-product-dto';
 import { ProductService } from '../../../_services/product-service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AssemblyLineDialog } from '../../dialog/assembly-line-dialog/assembly-line-dialog';
 
 @Component({
   selector: 'app-assembly-line-list',
@@ -23,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatCard,
     MatCardContent,
+    MatDialogModule,
     MatFormField,
     MatLabel,
     MatError,
@@ -40,6 +43,7 @@ export class AssemblyLineList implements OnInit {
   private fb = inject(FormBuilder);
   private cdr = inject(ChangeDetectorRef);
   private productService = inject(ProductService);
+  private dialog = inject(MatDialog);
 
   assemblyLines: GetAssemblyLineDto[] = [];
   products: GetProductDto[] = [];
@@ -138,7 +142,16 @@ export class AssemblyLineList implements OnInit {
   }
 
   editItem(assemblyLine: GetAssemblyLineDto) {
-    console.log(assemblyLine);
+    const dialogRef = this.dialog.open(AssemblyLineDialog, {
+      width: '400px',
+      data: { assemblyLine, products: this.products },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getAssemblyLines();
+      }
+    });
   }
 
   deleteItem(id: number) {
