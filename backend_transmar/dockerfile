@@ -1,0 +1,22 @@
+FROM node:22.22.0-alpine AS build
+WORKDIR /src
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+RUN npx prisma generate
+RUN npm run build
+
+FROM node:22.22.0-alpine AS runtime
+WORKDIR /app
+
+COPY --from=build /src/dist ./dist
+COPY --from=build /src/node_modules ./node_modules
+COPY --from=build /src/package*.json ./
+COPY --from=build /src/src/prisma ./src/prisma
+COPY --from=build /src/prisma.config.ts ./
+
+EXPOSE 3000
+CMD ["node", "dist/src/main.js"]
