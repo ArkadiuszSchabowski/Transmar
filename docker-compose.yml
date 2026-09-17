@@ -1,0 +1,41 @@
+version: "3.9"
+
+networks:
+  transmar-net:
+    driver: bridge
+
+services:
+  postgres_db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: transmar
+      POSTGRES_PASSWORD: transmar123
+      POSTGRES_DB: TransmarDb
+    ports:
+      - "5433:5432"
+    networks:
+      - transmar-net
+
+  backend:
+    build:
+      context: ./backend_transmar
+    command: sh -c "npx prisma migrate deploy && node dist/src/main.js"
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://transmar:transmar123@postgres_db:5432/TransmarDb?schema=public
+      - JWT_SECRET=change_me
+    depends_on:
+      - postgres_db
+    networks:
+      - transmar-net
+
+  frontend:
+    build:
+      context: ./frontend_transmar
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - transmar-net
