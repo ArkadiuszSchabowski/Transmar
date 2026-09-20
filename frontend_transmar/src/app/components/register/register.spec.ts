@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Register } from './register';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideToastr } from 'ngx-toastr';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('Register', () => {
   let component: Register;
@@ -8,9 +11,9 @@ describe('Register', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Register]
-    })
-    .compileComponents();
+      imports: [Register],
+      providers: [provideZonelessChangeDetection(), provideToastr(), provideHttpClient()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Register);
     component = fixture.componentInstance;
