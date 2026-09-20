@@ -18,11 +18,11 @@
   height: auto;
 }
 
-#add-button{
+#add-button {
   margin-top: 20px;
 }
 
-#panel-container{
+#panel-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,7 +34,7 @@
   padding: 20px 0;
 }
 
-#filter-container{
+#filter-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +43,7 @@
   margin-top: 20px;
 }
 
-.add-assembly-line-container-div{
+.add-assembly-line-container-div {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -52,18 +52,19 @@
   padding: 20px 0;
 }
 
-.add-assembly-line-container-form, .add-assembly-line-container-card {
+.add-assembly-line-container-form,
+.add-assembly-line-container-card {
   display: flex;
   flex-direction: column;
   background-color: white;
 }
 
-.add-assembly-line-container-card{
+.add-assembly-line-container-card {
   display: flex;
   width: 300px;
 }
 
-.add-assembly-line-container-card-content{
+.add-assembly-line-container-card-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,6 +77,8 @@
   align-items: center;
   width: 100%;
   height: auto;
+  color: map.get(mat.$blue-palette, 40);
+  font-weight: bold;
   background-color: white;
   margin-bottom: 5px;
 }
@@ -101,5 +104,5 @@
 }
 
 .button-standard {
-  background-color: white !important; 
+  background-color: white !important;
 }

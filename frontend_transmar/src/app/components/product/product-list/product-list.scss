@@ -19,11 +19,11 @@
   background-color: white;
 }
 
-#add-button{
+#add-button {
   margin-top: 20px;
 }
 
-.add-product-container-div{
+.add-product-container-div {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -32,18 +32,19 @@
   padding: 20px 0;
 }
 
-.add-product-container-form, .add-product-container-card {
+.add-product-container-form,
+.add-product-container-card {
   display: flex;
   flex-direction: column;
   background-color: white;
 }
 
-.add-product-container-card{
+.add-product-container-card {
   display: flex;
   width: 300px;
 }
 
-.add-product-container-card-content{
+.add-product-container-card-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,6 +56,7 @@
   justify-content: center;
   align-items: center;
   height: auto;
+  color: map.get(mat.$blue-palette, 40);
   background-color: white;
   margin-bottom: 5px;
 }
@@ -80,5 +82,5 @@
 }
 
 .button-standard {
-  background-color: white !important; 
+  background-color: white !important;
 }
