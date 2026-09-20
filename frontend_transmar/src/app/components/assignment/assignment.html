@@ -1,0 +1,92 @@
+<div id="assignment-container" class="container">
+  <div id="panel-container">
+    <div id="add-assembly-line-container">
+      @if (!isAddingAssignment) {
+        <button mat-raised-button class="button-reverse-color" (click)="changeFormVisibility()">
+          Add new assignment
+        </button>
+      }
+
+      @if (isAddingAssignment) {
+        <div class="add-assembly-line-container-div">
+          <form
+            class="add-assembly-line-container-form"
+            [formGroup]="addAssignmentForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <mat-card class="add-assembly-line-container-card">
+              <mat-card-content class="add-assembly-line-container-card-content">
+                <mat-form-field
+                  class="add-assembly-line-form-field mat-form-field-bottom"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>Assembly line</mat-label>
+                  <mat-select formControlName="assemblyLineId">
+                    @for (assemblyLine of assemblyLines; track assemblyLine.id) {
+                      <mat-option [value]="assemblyLine.id">{{ assemblyLine.name }}</mat-option>
+                    }
+                  </mat-select>
+
+                  @if (
+                    addAssignmentForm.get('assemblyLineId')?.hasError('required') &&
+                    addAssignmentForm.get('assemblyLineId')?.touched
+                  ) {
+                    <mat-error>Assembly line is required.</mat-error>
+                  }
+                </mat-form-field>
+
+                <mat-form-field
+                  class="add-assembly-line-form-field mat-form-field-bottom"
+                  appearance="outline"
+                  style="width: 100%"
+                >
+                  <mat-label>Workstation</mat-label>
+                  <mat-select formControlName="workstationId">
+                    @for (workstation of workstations; track workstation.id) {
+                      <mat-option [value]="workstation.id">{{ workstation.name }}</mat-option>
+                    }
+                  </mat-select>
+
+                  @if (
+                    addAssignmentForm.get('workstationId')?.hasError('required') &&
+                    addAssignmentForm.get('workstationId')?.touched
+                  ) {
+                    <mat-error>Workstation is required.</mat-error>
+                  }
+                </mat-form-field>
+
+                <button
+                  mat-raised-button
+                  id="add-button"
+                  class="button-reverse-color"
+                  type="submit"
+                >
+                  Add assignment
+                </button>
+              </mat-card-content>
+            </mat-card>
+          </form>
+        </div>
+      }
+    </div>
+  </div>
+
+    @if (assemblyLineWorkstations.length > 0) {
+      @for (assignment of assemblyLineWorkstations; track assignment.id) {
+        <div class="assembly-line-item">
+          <span class="assembly-line-id">{{ assignment.id }}</span>
+          <span class="assembly-line-name">{{ assignment.assemblyLineId }}</span>
+          <span class="assembly-line-id">{{ assignment.workstationId }}</span>
+
+          <div class="assembly-line-actions">
+            <button mat-icon-button (click)="deleteItem(assignment.id)" aria-label="remove">
+              <mat-icon class="remove">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      }
+    } @else {
+      <div class="add-assembly-line-container-div"><p>No assembly lines to display.</p></div>
+    }
+</div>

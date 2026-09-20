@@ -106,7 +106,6 @@ export class AssemblyLineList implements OnInit {
     this.assemblyLineService.getAll().subscribe({
       next: (response) => {
         this.assemblyLines = response;
-        console.log(this.assemblyLines);
         this.cdr.detectChanges();
       },
       error: () => console.error('server error.'),
