@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkstationList } from './workstation-list';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideToastr } from 'ngx-toastr';
 
 describe('WorkstationList', () => {
   let component: WorkstationList;
@@ -8,9 +11,9 @@ describe('WorkstationList', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkstationList]
-    })
-    .compileComponents();
+      imports: [WorkstationList],
+      providers: [provideZonelessChangeDetection(), provideHttpClient(), provideToastr()],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(WorkstationList);
     component = fixture.componentInstance;
