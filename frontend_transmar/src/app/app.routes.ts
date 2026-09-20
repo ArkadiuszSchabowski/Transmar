@@ -5,6 +5,7 @@ import { Register } from './components/register/register';
 import { ProductList } from './components/product/product-list/product-list';
 import { AssemblyLineList } from './components/assembly-line/assembly-line-list/assembly-line-list';
 import { WorkstationList } from './components/workstation/workstation-list/workstation-list';
+import { Assignment } from './components/assignment/assignment';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
   {
     path: 'workstation-list',
     component: WorkstationList,
+  },
+  {
+    path: 'assignment',
+    component: Assignment,
   },
   {
     path: '**',
